@@ -14,6 +14,7 @@
         findAllUsers();
     }
 
+    // Returns all users in the system
     function findAllUsers() {
         userService
             .findAllUsers()
@@ -21,7 +22,7 @@
     }
 
     function createUser() {
-        console.log('createUser');
+        console.log('createUser called');
 
         var username = $('#usernameFld').val();
         var password = $('#passwordFld').val();
@@ -35,6 +36,14 @@
             lastName: lastName
         };
 
+        fetch('http://localhost:8080/api/user', {
+        	method: 'post',
+        	body: JSON.stringify(user),
+        	headers: {
+        		'content-type': 'application/json'
+        	}
+        })
+        
         userService
             .createUser(user)
             .then(findAllUsers);
@@ -42,6 +51,7 @@
 
     function renderUsers(users) {
         tbody.empty();
+
         for(var i=0; i<users.length; i++) {
             var user = users[i];
             var clone = template.clone();
@@ -51,9 +61,8 @@
             clone.find('.delete').click(deleteUser);
             clone.find('.edit').click(editUser);
 
-            clone.find('.username')
-                .html(user.username);
-            tbody.append(clone);
+            clone.find('.username').html(user.username);
+            // tbody.append(clone);
         }
     }
 
