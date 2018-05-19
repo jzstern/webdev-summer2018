@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-public class User {
+public class Faculty extends User {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
@@ -14,8 +14,10 @@ public class User {
 	private String lastName;
 	private String role;
 	private String email;
+	private String office;
 	private String phone;
 	private Date dateOfBirth;
+	private boolean tenured;
 	
 	public int getId() {
 		return id;
@@ -70,5 +72,17 @@ public class User {
 	}
 	public void setBirthday(Date bday) {
 		this.dateOfBirth = bday;
+	}
+	public String getOffice() {
+		return office;
+	}
+	public void setOffice(String office) {
+		this.office = office;
+	}
+	public boolean getTenure() {
+		return tenured;
+	}
+	public void setTenure(boolean tenure) {
+		this.tenured = tenure;
 	}
 }

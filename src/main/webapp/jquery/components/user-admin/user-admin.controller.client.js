@@ -62,7 +62,10 @@
             clone.find('.edit').click(editUser);
 
             clone.find('.username').html(user.username);
-            // tbody.append(clone);
+            clone.find('.firstName').html(user.firstName);
+            clone.find('.lastName').html(user.lastName);
+            console.log('lastname: ' + user.lastName)
+            tbody.append(clone);
         }
     }
 

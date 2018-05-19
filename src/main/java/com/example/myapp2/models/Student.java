@@ -1,10 +1,11 @@
 package com.example.myapp2.models;
 
+import java.util.ArrayList;
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-public class User {
+public class Student extends User {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
@@ -16,6 +17,9 @@ public class User {
 	private String email;
 	private String phone;
 	private Date dateOfBirth;
+	private int GPA;
+	private int graduationYear;
+//	private ArrayList<Section> sections;
 	
 	public int getId() {
 		return id;
@@ -71,4 +75,25 @@ public class User {
 	public void setBirthday(Date bday) {
 		this.dateOfBirth = bday;
 	}
+	public int getGPA() {
+		return GPA;
+	}
+	public void setGPA(int gpa) {
+		this.GPA = gpa;
+	}
+	public int getGraduationYear() {
+		return graduationYear;
+	}
+	public void setGraduationYear(int gradYear) {
+		this.graduationYear = gradYear;
+	}
+//	public ArrayList<Section> getSections() {
+//		return sections;
+//	}
+//	public void addSection(Section section) {
+//		this.sections.add(section);
+//	}
+//	public void dropSection(Section section) {
+//		this.sections.remove(section);
+//	}
 }
