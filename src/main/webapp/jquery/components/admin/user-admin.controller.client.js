@@ -24,6 +24,8 @@
     function createUser() {
         console.log('createUser called');
 
+        // TODO ; prevent adding blank users
+
         var username = $('#usernameFld').val();
         var password = $('#passwordFld').val();
         var firstName = $('#firstNameFld').val();

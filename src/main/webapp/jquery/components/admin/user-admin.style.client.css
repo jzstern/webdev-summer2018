@@ -1,0 +1,16 @@
+table tr th {
+  width: 16%;
+}
+
+body {
+  background-color: #303030;
+}
+
+
+.table-curved {
+  border-collapse: separate;
+  border: solid #ddd 1px;
+  border-radius: 6px;
+  border-left: 0px;
+  border-top: 0px;
+}
