@@ -28,21 +28,15 @@
         var password = $('#passwordFld').val();
         var firstName = $('#firstNameFld').val();
         var lastName = $('#lastNameFld').val();
+        var role = $(':selected').val();
 
         var user = {
             username: username,
             password: password,
             firstName: firstName,
-            lastName: lastName
+            lastName: lastName,
+            role: role
         };
-
-        fetch('http://localhost:8080/api/user', {
-        	method: 'post',
-        	body: JSON.stringify(user),
-        	headers: {
-        		'content-type': 'application/json'
-        	}
-        })
         
         userService
             .createUser(user)
@@ -64,7 +58,8 @@
             clone.find('.username').html(user.username);
             clone.find('.firstName').html(user.firstName);
             clone.find('.lastName').html(user.lastName);
-            console.log('lastname: ' + user.lastName)
+            clone.find('.role').html(user.role);
+
             tbody.append(clone);
         }
     }

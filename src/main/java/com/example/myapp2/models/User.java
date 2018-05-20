@@ -1,12 +1,16 @@
 package com.example.myapp2.models;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 @Entity
 public class User {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone="GMT")
 	private int id;
 	private String username;
 	private String password;
@@ -16,6 +20,14 @@ public class User {
 	private String email;
 	private String phone;
 	private Date dateOfBirth;
+	
+	// For Faculty
+	private Boolean tenured;
+	private String office;
+	
+	// For Students
+	private Double GPA;
+	private Integer graduationYear;
 	
 	public int getId() {
 		return id;
@@ -70,5 +82,29 @@ public class User {
 	}
 	public void setBirthday(Date bday) {
 		this.dateOfBirth = bday;
+	}
+	public Double getGPA() {
+		return GPA;
+	}
+	public void setGPA(Double gpa) {
+		this.GPA = gpa;
+	}
+	public Integer getGraduationYear() {
+		return graduationYear;
+	}
+	public void setGraduationYear(Integer gradYear) {
+		this.graduationYear = gradYear;
+	}
+	public String getOffice() {
+		return office;
+	}
+	public void setOffice(String office) {
+		this.office = office;
+	}
+	public Boolean getTenure() {
+		return tenured;
+	}
+	public void setTenure(Boolean tenure) {
+		this.tenured = tenure;
 	}
 }
