@@ -4,6 +4,7 @@
 
     var tbody;
     var template;
+    var currentUserId;
     var userService = new UserServiceClient()
 
     function main() {
@@ -13,7 +14,7 @@
         $('#create-user-button').click(createUser);
         $('#update-user-button').click(updateUser);
         $('#delete-user-button').click(deleteUser);
-        $('#edit-user-button').click(updateUser);
+        $('#edit-user-button').click(editUser);
 
         findAllUsers();
     }
@@ -29,10 +30,6 @@
         userService
           .findUserById()
           .then()
-    }
-
-    function selectUser() {
-
     }
 
     function createUser() {
@@ -58,11 +55,52 @@
             .createUser(user)
             .then(findAllUsers);
 
-        // TODO ; clear form after adding user
+        clearForm;
+    }
+
+    function editUser(event) {
+        var editBtn = $(event.currentTarget);
+        var userId = editBtn
+          .parent()
+          .parent()
+          .attr('id');
+
+        userService
+          .findUserById(userId)
+          .then(function(user) {
+            $('#usernameFld').val(user.username);
+            $('#passwordFld').val(user.password);
+            $('#firstNameFld').val(user.firstName);
+            $('#lastNameFld').val(user.lastName);
+            $(':selected').val(user.role);                      // TODO ; selected value not updating
+
+            currentUserId = userId;
+          });
     }
 
     function updateUser() {
+        var user = {};
 
+        user.username =  $('#usernameFld').val();
+        user.password =  $('#passwordFld').val();
+        user.firstName =  $('#firstNameFld').val();
+        user.lastName =  $('#lastNameFld').val();
+        user.role = $(':selected').val();
+
+        clearForm;                                             // TODO ; form not clearing
+
+        userService
+          .updateUser(currentUserId, user)
+          .then(findAllUsers);
+    }
+
+    function clearForm() {
+        console.log('clearing form!!');
+      $('#usernameFld').val('');
+      $('#passwordFld').val('');
+      $('#firstNameFld').val('');
+      $('#lastNameFld').val('');
+      currentUserId = null;
     }
 
     function deleteUser(event) {
@@ -82,7 +120,7 @@
       clone.attr('id', user.id);
 
       clone.find('.delete').click(deleteUser);
-      clone.find('.edit').click(updateUser);
+      clone.find('.edit').click(editUser);
 
       clone.find('.username').html(user.username);
       clone.find('.firstName').html(user.firstName);
