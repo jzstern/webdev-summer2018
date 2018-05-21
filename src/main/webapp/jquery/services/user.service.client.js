@@ -5,8 +5,10 @@ function UserServiceClient() {
     this.findUserById = findUserById;
     this.updateUser = updateUser;
     this.login = login;
-    this.url = 'http://localhost:8080/api/user';
-    this.loginURL = 'http://localhost:8080/api/login';
+    // this.url = 'http://localhost:8080/api/user';                    // for local testing
+    // this.loginURL = 'http://localhost:8080/api/login';
+    this.url = 'https://stern-webdev-2018.herokuapp.com';           // for deployment
+    this.loginURL = 'https://stern-webdev-2018.herokuapp.com/api/login';
     var self = this;
 
     function login(username, password) {
