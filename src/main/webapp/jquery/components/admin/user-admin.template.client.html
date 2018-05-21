@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
   <link href="user-admin.style.client.css" rel="stylesheet"/>
   <title>User Admin Page</title>
   <script
@@ -27,7 +28,7 @@
             <th style="width: 16%; font-size: 22px">First Name</th>
             <th style="width: 16%; font-size: 22px">Last Name</th>
             <th style="width: 16%; font-size: 22px">Role</th>
-            <th style="width: 16%; font-size: 22px"></th>
+            <th style="width: 16%; font-size: 22px">&nbsp;</th>
           </tr>
           <tr>
             <th><input id="usernameFld" class="form-control" placeholder="jdoe"/></th>
@@ -41,7 +42,12 @@
               </select>
             </th>
             <th style="text-align: center">
-              <button id="createUser" class="btn btn-success" style="width: 75%; gravity: center;">Create</button>
+               <span>
+                 <i class="fa-2x fa fa-search wbdv-search"></i>
+                 <i class="fa-2x fa fa-plus wbdv-create"></i>
+                 <i class="fa-2x fa fa-check wbdv-update"></i>
+              </span>
+              <!--<button id="createUser" class="btn btn-success" style="width: 75%; gravity: center;">Create</button>-->
             </th>
           </tr>
         </thead>
@@ -52,9 +58,11 @@
             <td class="firstName"></td>
             <td class="lastName"></td>
             <td class="role"></td>
-            <th>
-              <button class="delete btn btn-danger" style="margin-right: 18px">Delete</button>
-              <button class="edit btn btn-warning">Edit</button>
+            <th style="text-align: center">
+              <span>
+                <button class="delete btn btn-danger" style="margin-right: 18px">Delete</button>
+                <button class="edit btn btn-warning">Edit</button>
+              </span>
             </th>
           </tr>
         </tbody>

@@ -21,6 +21,16 @@
             .then(renderUsers);
     }
 
+    function findUserById() {
+        userService
+          .findUserById()
+          .then()
+    }
+
+    function selectUser() {
+
+    }
+
     function createUser() {
         console.log('createUser called');
 
@@ -45,25 +55,8 @@
             .then(findAllUsers);
     }
 
-    function renderUsers(users) {
-        tbody.empty();
+    function updateUser() {
 
-        for(var i=0; i<users.length; i++) {
-            var user = users[i];
-            var clone = template.clone();
-
-            clone.attr('id', user.id);
-
-            clone.find('.delete').click(deleteUser);
-            clone.find('.edit').click(editUser);
-
-            clone.find('.username').html(user.username);
-            clone.find('.firstName').html(user.firstName);
-            clone.find('.lastName').html(user.lastName);
-            clone.find('.role').html(user.role);
-
-            tbody.append(clone);
-        }
     }
 
     function deleteUser(event) {
@@ -78,9 +71,27 @@
             .then(findAllUsers);
     }
 
-    function editUser(event) {
-        console.log('editUser');
-        console.log(event);
+    function renderUser(user) {
+      var clone = template.clone();
+      clone.attr('id', user.id);
+
+      clone.find('.delete').click(deleteUser);
+      clone.find('.edit').click(updateUser);
+
+      clone.find('.username').html(user.username);
+      clone.find('.firstName').html(user.firstName);
+      clone.find('.lastName').html(user.lastName);
+      clone.find('.role').html(user.role);
+      return clone;
     }
 
+    function renderUsers(users) {
+        tbody.empty();
+
+        for(var i=0; i<users.length; i++) {
+            var user = users[i];
+            var clone = renderUser(user);
+            tbody.append(clone);
+        }
+    }
 })();
