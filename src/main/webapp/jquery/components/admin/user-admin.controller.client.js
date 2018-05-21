@@ -9,7 +9,11 @@
     function main() {
         tbody = $('tbody');
         template = $('.template');
-        $('#createUser').click(createUser);
+        $('#search-user-button').click(findUserById);
+        $('#create-user-button').click(createUser);
+        $('#update-user-button').click(updateUser);
+        $('#delete-user-button').click(deleteUser);
+        $('#edit-user-button').click(updateUser);
 
         findAllUsers();
     }
@@ -53,6 +57,8 @@
         userService
             .createUser(user)
             .then(findAllUsers);
+
+        // TODO ; clear form after adding user
     }
 
     function updateUser() {

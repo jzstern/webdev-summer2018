@@ -42,10 +42,16 @@
               </select>
             </th>
             <th style="text-align: center">
-               <span>
-                 <i class="fa-2x fa fa-search wbdv-search"></i>
-                 <i class="fa-2x fa fa-plus wbdv-create"></i>
-                 <i class="fa-2x fa fa-check wbdv-update"></i>
+               <span class="btn-group">
+                 <button id="search-user-button" class="btn-info">
+                   <i class="fa-2x fa fa-search wbdv-search"></i>
+                 </button>
+                 <button id="create-user-button" class="btn-success">
+                   <i class="fa-2x fa fa-plus wbdv-create"></i>
+                 </button>
+                 <button id="update-user-button" class="btn-primary">
+                   <i class="fa-2x fa fa-check wbdv-update"></i>
+                 </button>
               </span>
               <!--<button id="createUser" class="btn btn-success" style="width: 75%; gravity: center;">Create</button>-->
             </th>
@@ -59,10 +65,8 @@
             <td class="lastName"></td>
             <td class="role"></td>
             <th style="text-align: center">
-              <span>
-                <button class="delete btn btn-danger" style="margin-right: 18px">Delete</button>
-                <button class="edit btn btn-warning">Edit</button>
-              </span>
+              <button id="delete-user-button" class="delete btn btn-danger" style="margin-right: 18px">Delete</button>
+              <button id="edit-user-button" class="edit btn btn-warning">Edit</button>
             </th>
           </tr>
         </tbody>
