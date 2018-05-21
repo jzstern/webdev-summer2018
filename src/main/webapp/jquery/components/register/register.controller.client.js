@@ -29,9 +29,5 @@
           // TODO ; navigate to
         });
     }
-
-
-
-    clearForm;
   }
 });

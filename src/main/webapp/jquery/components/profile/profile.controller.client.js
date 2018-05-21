@@ -1,23 +1,24 @@
 (function() {
     $(init);
 
-    var $staticEmail;
-    var $firstName;
-    var $lastName;
-    var $updateBtn;
-    var userService = new UserServiceClient();
+    var staticEmail;
+    var firstName;
+    var lastName;
+    var updateBtn;
+    var logoutBtn
+    var serService = new UserServiceClient();
 
     function init() {
-        $staticEmail = $("#staticEmail");
-        $firstName = $("#firstName");
-        $lastName = $("#lastName");
-        $updateBtn = $("#updateBtn")
-            .click(updateUser);
+        staticEmail = $("#staticEmail");
+        firstName = $("#firstName");
+        lastName = $("#lastName");
+        updateBtn = $("#update-button").click(updateProfile);
+        logoutBtn = $("#logout-button").click(logout);
 
         findUserById(12);
     }
 
-    function updateUser() {
+    function updateProfile() {
         var user = {
             firstName: $firstName.val(),
             lastName: $lastName.val()

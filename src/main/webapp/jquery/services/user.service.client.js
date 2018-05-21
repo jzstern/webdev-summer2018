@@ -23,7 +23,10 @@ function UserServiceClient() {
     }
 
     function register(username, password, callback) {
-        
+        return fetch(self.url + '/register')
+          .then(function(response) {
+                                                        // TODO ; ADD STUFF
+          })
     }
 
     function updateUser(userId, user, callback) {

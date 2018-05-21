@@ -33,8 +33,6 @@
     }
 
     function createUser() {
-        console.log('createUser called');
-
         // TODO ; prevent adding blank users
 
         var username = $('#usernameFld').val();
