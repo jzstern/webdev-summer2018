@@ -1,31 +1,37 @@
 (function() {
     $(init);
 
-    var staticEmail;
-    var firstName;
-    var lastName;
-    var updateBtn;
-    var logoutBtn
-    var serService = new UserServiceClient();
+    var $username;
+    var $phoneNumber;
+    var $email;
+    var $role;
+    var $dateOfBirth;
+    // var $firstName;
+    // var $lastName;
+    var updateBtn, logoutBtn;
+    var userService = new UserServiceClient();
 
     function init() {
-        staticEmail = $("#staticEmail");
-        firstName = $("#firstName");
-        lastName = $("#lastName");
+        $username = $("#username");
+        $phoneNumber = $("#phoneNumber");
+        $email = $("#email");
+        $role = $("#role");
+        $dateOfBirth = $("#birthday");
         updateBtn = $("#update-button").click(updateProfile);
         logoutBtn = $("#logout-button").click(logout);
 
-        findUserById(12);
+        findUserById(2);
     }
 
     function updateProfile() {
         var user = {
-            firstName: $firstName.val(),
-            lastName: $lastName.val()
+            firstName: firstName.val(),
+            lastName: lastName.val()
+
         };
 
         userService
-            .updateUser(12, user)
+            .updateUser(2, user)
             .then(success);
     }
 
@@ -37,6 +43,10 @@
         }
     }
 
+    function logout() {
+
+    }
+
     function findUserById(userId) {
         userService
             .findUserById(userId)
@@ -45,8 +55,12 @@
     
     function renderUser(user) {
         console.log(user);
-        $staticEmail.val(user.username);
-        $firstName.val(user.firstName);
-        $lastName.val(user.lastName);
+        $("#username").val(user.username);
+        $("#phoneNumber").val(user.phone);
+        $("#email").val(user.email);
+        $("#role").val(user.role);
+        $("#birthday").val(user.dateOfBirth);
+        // $firstName.val(user.firstName);
+        // $lastName.val(user.lastName);
     }
 })();

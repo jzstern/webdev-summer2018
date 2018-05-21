@@ -52,16 +52,16 @@ public class UserService {
 		return null;
 	}
 	
-	@PostMapping("/api/register")
-	public User register(@RequestBody User user, HttpSession session) {
-		UserService userService = new UserService();
-		User u = userService.findUserById(user.getId());
-	
-		if (u == null) userService.createUser(user);
-	
-		session.setAttribute("user", user);
-		return user;
-	}
+//	@PostMapping("/api/register")
+//	public User register(@RequestBody User user, HttpSession session) {
+//		UserService userService = new UserService();
+//		User u = userService.findUserById(user.getId());
+//	
+//		if (u == null) userService.createUser(user);
+//	
+//		session.setAttribute("user", user);
+//		return user;
+//	}
 
 	@PutMapping("/api/user/{userId}")
 	public User updateUser(@PathVariable("userId") int userId, @RequestBody User newUser) {
