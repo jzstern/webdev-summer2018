@@ -4,14 +4,15 @@ function UserServiceClient() {
     this.deleteUser = deleteUser;
     this.findUserById = findUserById;
     this.updateUser = updateUser;
+    this.register = register;
     this.login = login;
-    // this.url = 'http://localhost:8080/api/user';                    // for local testing
-    // this.loginURL = 'http://localhost:8080/api/login';
-    this.url = 'https://stern-webdev-2018.herokuapp.com';           // for deployment
-    this.loginURL = 'https://stern-webdev-2018.herokuapp.com/api/login';
+    this.url = 'http://localhost:8080/api/user';                    // for local testing
+    this.loginURL = 'http://localhost:8080/api/login';
+    // this.url = 'https://stern-webdev-2018.herokuapp.com';           // for deployment
+    // this.loginURL = 'https://stern-webdev-2018.herokuapp.com/api/login';
     var self = this;
 
-    function login(username, password) {
+    function login(username, password, callback) {
         return fetch(self.loginURL, {
             method: 'post',
             body: JSON.stringify({username:username, password: password}),
@@ -21,7 +22,11 @@ function UserServiceClient() {
         });
     }
 
-    function updateUser(userId, user) {
+    function register(username, password, callback) {
+        
+    }
+
+    function updateUser(userId, user, callback) {
         return fetch(self.url + '/' + userId, {
             method: 'put',
             body: JSON.stringify(user),
@@ -29,7 +34,7 @@ function UserServiceClient() {
                 'content-type': 'application/json'
             }
         })
-        .then(function(response){
+        .then(function(response, callback){
             if(response.bodyUsed) {
                 return response.json();
             } else {
@@ -38,27 +43,27 @@ function UserServiceClient() {
         });
     }
 
-    function findUserById(userId) {
+    function findUserById(userId, callback) {
         return fetch(self.url + '/' + userId)
             .then(function(response){
                 return response.json();
             });
     }
 
-    function deleteUser(userId) {
+    function deleteUser(userId, callback) {
         return fetch(self.url + '/' + userId, {
             method: 'delete'
         })
     }
 
-    function findAllUsers() {
+    function findAllUsers(callback) {
         return fetch(self.url)
             .then(function (response) {
                 return response.json();
             });
     }
 
-    function createUser(user) {
+    function createUser(user, callback) {
         return fetch(self.url, {
             method: 'post',
             body: JSON.stringify(user),

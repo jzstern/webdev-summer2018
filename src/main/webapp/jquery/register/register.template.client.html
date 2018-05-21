@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Register</title>
+
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+  <link href="register.style.client.css" rel="stylesheet"/>
+
+  <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous">
+  </script>
+  <script src="../services/user.service.client.js"></script>
+  <script src="register.controller.client.js"></script>
+
+</head>
+<body>
+  <div class="container">
+    <h1 id="title">Sign Up</h1>
+    <form>
+
+      <!--Username-->
+      <div class="form-group row">
+        <label for="usernameFld" class="col-sm-2 col-form-label">
+          Username </label>
+        <div class="col-sm-10">
+          <input class="form-control" id="usernameFld" placeholder="e.g. mstewart">
+        </div>
+      </div>
+
+      <!--Password-->
+      <div class="form-group row">
+        <label for="passwordFld" class="col-sm-2 col-form-label">
+          Password </label>
+        <div class="col-sm-10">
+          <input class="form-control" id="passwordFld" placeholder="Pick something complex!" type="password">
+        </div>
+      </div>
+
+      <!--Verify Password-->
+      <div class="form-group row">
+        <label for="verifyPasswordFld" class="col-sm-2 col-form-label">
+          Verify Password </label>
+        <div class="col-sm-10">
+          <input class="form-control" id="verifyPasswordFld" placeholder="Must match above password" type="password">
+        </div>
+      </div>
+      <button id="register-button" class="btn btn-block btn-primary" style="margin-top: 15px; margin-bottom: 10px;">Register</button>
+
+    </form>
+    <a href="../login/login.template.client.html">Already have an account? Login</a>
+  </div>
+</body>
+</html>
