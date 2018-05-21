@@ -34,7 +34,7 @@ public class UserService {
 	}
 
 	@PostMapping("/api/login")
-	public List<User> login(@RequestBody User user, HttpSession session) {
+	public List<User> login(@RequestBody User user) {
 		return (List<User>) repository.findUserByCredentials(user.getUsername(), user.getPassword());
 	}
 
@@ -43,17 +43,19 @@ public class UserService {
 		return (List<User>) repository.findAll();
 	}
 	
-	@GetMapping("/api/user/{username}")
-	public Iterable<User> findUserByUsername(@PathVariable("username") String username) {
-		Iterable<User> data = repository.findUserByUsername(username);
-		if(data != null) {
-			return data;
+	@GetMapping("/api/user-string/{username}")
+	public User findUserByUsername(@PathVariable("username") String username) {
+		List<User> data = ((List<User>) repository.findUserByUsername(username));
+		if(data.isEmpty()) {
+			return null;
 		}
-		return null;
+		else {
+			return data.get(0);
+		}
 	}
 	
-//	@PostMapping("/api/register")
-//	public User register(@RequestBody User user, HttpSession session) {
+	@PostMapping("/api/register")
+	public User register(@RequestBody User user) {
 //		UserService userService = new UserService();
 //		User u = userService.findUserById(user.getId());
 //	
@@ -61,18 +63,56 @@ public class UserService {
 //	
 //		session.setAttribute("user", user);
 //		return user;
-//	}
+		
+		if (((List<User>)repository.findUserByUsername(user.getUsername())).size() == 0) {
+			return this.createUser(user);
+		} else {
+			return null;
+		}
+	}
 
 	@PutMapping("/api/user/{userId}")
 	public User updateUser(@PathVariable("userId") int userId, @RequestBody User newUser) {
 		Optional<User> data = repository.findById(userId);
-		if(data.isPresent()) {
+		if (data.isPresent()) {
 			User user = data.get();
-			user.setFirstName(newUser.getFirstName());
+			if (newUser.getUsername() != null) {
+				user.setUsername(newUser.getUsername());
+			}
+			if (newUser.getPassword() != null) {
+				user.setPassword(newUser.getPassword());
+			}
+			if (newUser.getFirstName() != null) {
+				user.setFirstName(newUser.getFirstName());
+			}
+			if (newUser.getLastName() != null) {
+				user.setLastName(newUser.getLastName());
+			}
+			if (newUser.getEmail() != null) {
+				user.setEmail(newUser.getEmail());
+			}
+			if (newUser.getPhoneNumber() != null) {
+				user.setPhoneNumber(newUser.getPhoneNumber());
+			}
+			if (newUser.getBirthday() != null) {
+				user.setBirthday(newUser.getBirthday());
+			}
+			if (newUser.getRole() != null) {
+				user.setRole(newUser.getRole());
+			}
 			repository.save(user);
 			return user;
+		} else {
+			return null;
 		}
-		return null;
+//		
+//		if(data.isPresent()) {
+//			User user = data.get();
+//			user.setFirstName(newUser.getFirstName());
+//			repository.save(user);
+//			return user;
+//		}
+//		return null;
 	}
 
 	@GetMapping("/api/user/{userId}")

@@ -17,7 +17,16 @@
     password = $('#passwordFld').val();
     verifyPassword = $('#verifyPasswordFld').val();
 
-    if (password == verifyPassword) {
+    if (password != verifyPassword) {
+      alert('Passwords must match');
+    }
+    else if (username == "") {
+      alert('Username cannot be blank')
+    }
+    else if (password == "") {
+      alert('Password cannot be blank')
+    }
+    else {
       var user = {
         username: username,
         password: password
@@ -25,8 +34,10 @@
 
       userService
         .register(user)
-        .then(function() {
-          // TODO ; navigate to
+        .then(function(registeredUser) {
+          console.log(registeredUser);
+          var url = "http://localhost:8080/jquery/components/profile/profile.template.client.html?" + registeredUser.userId;
+          window.location = url;
         });
     }
   }

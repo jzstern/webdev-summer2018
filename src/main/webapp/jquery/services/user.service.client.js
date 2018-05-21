@@ -25,6 +25,7 @@ function UserServiceClient() {
     function register(username, password, callback) {
         return fetch(self.url + '/register')
           .then(function(response) {
+
                                                         // TODO ; ADD STUFF
           })
     }
@@ -48,9 +49,16 @@ function UserServiceClient() {
 
     function findUserById(userId, callback) {
         return fetch(self.url + '/' + userId)
-            .then(function(response){
+            .then(function(response) {
                 return response.json();
             });
+    }
+
+    function findUserByUsername(username, callback) {
+        return fetch(self.url + '-string/' + username)
+          .then(function(response) {
+              return response.json();
+          })
     }
 
     function deleteUser(userId, callback) {

@@ -17,8 +17,4 @@ public interface UserRepository
 	@Query("SELECT u FROM User u WHERE u.username=:username")
 	Iterable<User> findUserByUsername(
 		@Param("username") String username);
-	
-//	@Query("INSERT u INTO User")
-//	Optional<User> register(
-//			@Param("user") Iterable<User> u);
 }
