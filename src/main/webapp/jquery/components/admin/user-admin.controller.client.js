@@ -29,12 +29,10 @@
     function findUserById() {
         userService
           .findUserById()
-          .then()
+          .then();
     }
 
     function createUser() {
-        // TODO ; prevent adding blank users
-
         var username = $('#usernameFld').val();
         var password = $('#passwordFld').val();
         var firstName = $('#firstNameFld').val();
@@ -48,12 +46,17 @@
             lastName: lastName,
             role: role
         };
-        
-        userService
-            .createUser(user)
-            .then(findAllUsers);
 
-        clearForm;
+        if (username === '' || password === '' || firstName === '' || lastName === '') {
+            alert('You must fill out all fields before creating a user');
+        } else {
+            userService
+                .createUser(user)
+                .then(findAllUsers);
+
+            clearForm;
+        }
+
     }
 
     function editUser(event) {
@@ -70,7 +73,7 @@
             $('#passwordFld').val(user.password);
             $('#firstNameFld').val(user.firstName);
             $('#lastNameFld').val(user.lastName);
-            $(':selected').val(user.role);                      // TODO ; selected value not updating
+            $(':selected').val(user.role);
 
             currentUserId = userId;
           });
@@ -85,7 +88,7 @@
         user.lastName =  $('#lastNameFld').val();
         user.role = $(':selected').val();
 
-        clearForm;                                             // TODO ; form not clearing
+        clearForm;
 
         userService
           .updateUser(currentUserId, user)
@@ -93,12 +96,11 @@
     }
 
     function clearForm() {
-        console.log('clearing form!!');
-      $('#usernameFld').val('');
-      $('#passwordFld').val('');
-      $('#firstNameFld').val('');
-      $('#lastNameFld').val('');
-      currentUserId = null;
+        $('#usernameFld').val('');
+        $('#passwordFld').val('');
+        $('#firstNameFld').val('');
+        $('#lastNameFld').val('');
+        currentUserId = null;
     }
 
     function deleteUser(event) {

@@ -105,14 +105,6 @@ public class UserService {
 		} else {
 			return null;
 		}
-//		
-//		if(data.isPresent()) {
-//			User user = data.get();
-//			user.setFirstName(newUser.getFirstName());
-//			repository.save(user);
-//			return user;
-//		}
-//		return null;
 	}
 
 	@GetMapping("/api/user/{userId}")

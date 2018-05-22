@@ -2,43 +2,57 @@
 
   jQuery(main);
 
+  var $username, $password, $verifyPassword;
   var userService = new UserServiceClient();
-  var username, password, verifyPassword;
 
   function main() {
-    template = $('.template');
     $('#register-button').click(register);
   }
 
   function register() {
-    // TODO ; prevent adding blank users
+    $username = $('#usernameFld').val();
+    $password = $('#passwordFld').val();
+    $verifyPassword = $('#verifyPasswordFld').val();
 
-    username = $('#usernameFld').val();
-    password = $('#passwordFld').val();
-    verifyPassword = $('#verifyPasswordFld').val();
+    console.log('CALLED REGISTER');
 
-    if (password != verifyPassword) {
+    if ($password !== $verifyPassword) {
       alert('Passwords must match');
+      clearForm;
     }
-    else if (username == "") {
+    else if ($username === "") {
       alert('Username cannot be blank')
     }
-    else if (password == "") {
+    else if ($password === "") {
       alert('Password cannot be blank')
     }
     else {
-      var user = {
-        username: username,
-        password: password
-      };
+      userService
+        .findByUsername($username)
+        .then(tryRegistration);
+    }
+  }
+
+  function tryRegistration(receivedUser) {
+    if (!receivedUser.username) {
+      var user = new User();
+      user.setUsername($username);
+      user.setPassword($password);
 
       userService
         .register(user)
-        .then(function(registeredUser) {
-          console.log(registeredUser);
-          var url = "http://localhost:8080/jquery/components/profile/profile.template.client.html?" + registeredUser.userId;
-          window.location = url;
-        });
+        .then(function(user) {
+          window.location.href = '../profile/profile.template.client.html?' + user.id;
+        })
+    } else {
+      alert('Sorry, that username is taken. Please choose another');
+      clearForm;
     }
+  }
+
+  function clearForm() {
+    $('#username').val('');
+    $('#password').val('');
+    $('#verifyPassword').val('');
   }
 });

@@ -3,28 +3,36 @@
   jQuery(main);
 
   var userService = new UserServiceClient();
-  var username, password;
+  var $username, $password, $loginBtn;
 
   function main() {
-    template = $('.template');
-    $('#login-button').click(login);
+    $username = $('#usernameFld').val();
+    $password = $('#passwordFld').val();
+    $loginBtn = $('#login-button').click(login);
   }
 
   function login() {
-    // TODO ; incorrect username/password
 
-    username = $('#usernameFld').val();
-    password = $('#passwordFld').val();
+    if (!$username || !$password) {
+      alert('Please enter values for both username and password');
+    }
 
-    var user = {
-      username: username,
-      password: password
-    };
+    var user = new User();
+    user.setUsername($username);
+    user.setPassword($password);
+
+    console.log('TRYNA LOGIN HERE');
 
     userService
       .login(user)
-      .then(function() {
-        // TODO ; redirect to profile page
-      });
+      .then(checkLogin);
+  }
+
+  function checkLogin(user) {
+    if (user) {
+      window.location.href = "../profile/profile.template.client.html?" + user.id;
+    } else {
+      alert('Sorry, that username password combination does not exist');
+    }
   }
 });

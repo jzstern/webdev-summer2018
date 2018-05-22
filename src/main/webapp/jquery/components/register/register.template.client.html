@@ -8,11 +8,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
   <link href="register.style.client.css" rel="stylesheet"/>
 
-  <script
-      src="https://code.jquery.com/jquery-3.3.1.min.js"
-      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-      crossorigin="anonymous">
-  </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="../../services/user.service.client.js"></script>
   <script src="register.controller.client.js"></script>
 
@@ -48,7 +44,9 @@
           <input class="form-control" id="verifyPasswordFld" placeholder="Must match above password" type="password">
         </div>
       </div>
-      <button id="register-button" class="btn btn-block btn-primary" style="margin-top: 15px; margin-bottom: 10px;">Register</button>
+
+      <button id="register-button" type="button" class="btn btn-block btn-primary"
+              style="margin-top: 15px; margin-bottom: 10px;">Register</button>
 
     </form>
     <a href="../login/login.template.client.html">Already have an account? Login</a>

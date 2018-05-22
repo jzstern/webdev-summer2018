@@ -45,21 +45,16 @@
     }
 
     function success(response) {
-        if(response === null) {
+        if(!response) {
             alert('unable to update')
-            console.log('undable to update')
         } else {
             alert('success');
-            console.log('success!')
         }
     }
 
     function logout() {
         console.log('CALLING LOGOUT');
-        // for local
-        window.location.href = "http://localhost:8080/jquery/components/login/login.template.client.html";
-        // for heroku
-        // window.location = "https://stern-webdev-2018.herokuapp.com/jquery/components/login/login.template.client.html";
+        window.location.href = "../login/login.template.client.html";
     }
 
     function findUserById(userId) {
@@ -67,18 +62,19 @@
             .findUserById(userId)
             .then(renderUser);
     }
-    
-    function renderUser(user) {
-        // var bday = user.birthday.toISOString().split('T')[0];
 
-        console.log(user);
+    function renderUser(user) {
+        var bday = new Date(user.birthday);
+        var year = user.birthday.substring(0, 4);
+        var month = bday.getMonth();
+        if (month.toString().length == 1) month = '0' + month;
+        var day = bday.getDay();
+        if (day.toString().length == 1) day = '0' + day;
+
         $("#username").val(user.username);
         $("#phoneNumber").val(user.phoneNumber);
         $("#email").val(user.email);
         $("#role").val(user.role);
-        // $("#birthday").val(bday);
-        $("#birthday").val(user.birthday);
-        // $firstName.val(user.firstName);
-        // $lastName.val(user.lastName);
+        $("#birthday").val(year + '-' + month + '-' + day);
     }
 })();

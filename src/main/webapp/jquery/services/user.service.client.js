@@ -15,7 +15,7 @@ function UserServiceClient() {
     function login(username, password, callback) {
         return fetch(self.loginURL, {
             method: 'post',
-            body: JSON.stringify({username:username, password: password}),
+            body: JSON.stringify({username: username, password: password}),
             headers: {
                 'content-type': 'application/json'
             }
