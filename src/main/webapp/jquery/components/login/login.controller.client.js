@@ -11,20 +11,27 @@
   }
 
   function login() {
-    var user = new User()
-    user.setUsername($username.val())
-    user.setPassword($password.val())
+	  $username = $("#usernameFld").val()
+	  $password = $("#passwordFld").val()
+
+    var user = {
+      username: $username,
+      password: $password
+    }
 
     userService
-      .login(user.username, user.password)
+      .login(user)
       .then(checkLogin)
   }
 
-  function checkLogin(user) {
-    if (user.username == null && user.password == null) {
-      window.location.href = "../profile/profile.template.client.html?" + user.id
-    } else {
+  function checkLogin(users) {
+    var user = users[0]
+    console.log(user)
+
+    if (user.username === null && user.password === null) {
       alert('Sorry, that username password combination does not exist')
+    } else {
+      window.location.href = "../profile/profile.template.client.html?" + user.id
     }
   }
 })();

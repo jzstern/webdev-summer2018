@@ -39,18 +39,19 @@
 
 				userService
 					.updateUser(globalUserId, user)
-					.then(success);
+					.then(function() {
+						alert('Record updated successfully')
+					})
 			});
-
 	}
 
-	function success(response) {
-		if(response === null) {
-			alert('Unable to update')
-		} else {
-			alert('Record updated successfully');
-		}
-	}
+	// function success(response) {
+	// 	if(response === null) {
+	// 		alert('Unable to update')
+	// 	} else {
+	// 		alert('Record updated successfully');
+	// 	}
+	// }
 
 	function logout() {
 		console.log('CALLING LOGOUT');

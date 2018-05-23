@@ -47,7 +47,7 @@ public class UserService {
 	public User findUserByUsername(@PathVariable("username") String username) {
 		List<User> data = ((List<User>) repository.findUserByUsername(username));
 		if(data.isEmpty()) {
-			return null;
+			return new User();
 		}
 		else {
 			return data.get(0);
