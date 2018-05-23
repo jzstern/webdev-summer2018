@@ -1,4 +1,5 @@
 function User(username, password, firstName, lastName, email, phone, role, DOB) {
+// function User() {
   this.username = username;
   this.password = password;
   this.firstName = firstName;
@@ -7,6 +8,15 @@ function User(username, password, firstName, lastName, email, phone, role, DOB) 
   this.phone = phone;
   this.role = role;
   this.dateOfBirth = DOB;
+
+	// this.username;
+	// this.password;
+	// this.firstName;
+	// this.lastName;
+	// this.email;
+	// this.phone;
+	// this.role;
+	// this.dateOfBirth;
 
   this.setUsername = setUsername;
   this.getUsername = getUsername;

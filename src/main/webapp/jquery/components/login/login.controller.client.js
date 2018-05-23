@@ -1,38 +1,30 @@
 (function () {
 
-  jQuery(main);
-
-  var userService = new UserServiceClient();
-  var $username, $password, $loginBtn;
+  var userService = new UserServiceClient()
+  var $username, $password, $loginBtn
+	$(main);
 
   function main() {
-    $username = $('#usernameFld').val();
-    $password = $('#passwordFld').val();
-    $loginBtn = $('#login-button').click(login);
+	  $username = $("#usernameFld")
+	  $password = $("#passwordFld")
+    $loginBtn = $("#login-button").click(login)
   }
 
   function login() {
-
-    if (!$username || !$password) {
-      alert('Please enter values for both username and password');
-    }
-
-    var user = new User();
-    user.setUsername($username);
-    user.setPassword($password);
-
-    console.log('TRYNA LOGIN HERE');
+    var user = new User()
+    user.setUsername($username.val())
+    user.setPassword($password.val())
 
     userService
-      .login(user)
-      .then(checkLogin);
+      .login(user.username, user.password)
+      .then(checkLogin)
   }
 
   function checkLogin(user) {
-    if (user) {
-      window.location.href = "../profile/profile.template.client.html?" + user.id;
+    if (user.username == null && user.password == null) {
+      window.location.href = "../profile/profile.template.client.html?" + user.id
     } else {
-      alert('Sorry, that username password combination does not exist');
+      alert('Sorry, that username password combination does not exist')
     }
   }
-});
+})();

@@ -56,4 +56,4 @@
 		$('#password').val('');
 		$('#verifyPassword').val('');
 	}
-});
+})();
