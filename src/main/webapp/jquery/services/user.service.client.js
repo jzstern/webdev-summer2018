@@ -7,11 +7,12 @@ function UserServiceClient() {
     this.updateUser = updateUser;
     this.register = register;
     this.login = login;
-    this.url = 'http://localhost:8080/api/user';                    // for local testing
-    this.loginURL = 'http://localhost:8080/api/login';
-    this.registerURL = 'http://localhost:8080/api/register';
-    // this.url = 'https://stern-webdev-2018.herokuapp.com';           // for deployment
-    // this.loginURL = 'https://stern-webdev-2018.herokuapp.com/api/login';
+    // this.url = 'http://localhost:8080/api/user';                    // for local testing
+    // this.loginURL = 'http://localhost:8080/api/login';
+    // this.registerURL = 'http://localhost:8080/api/register';
+    this.url = 'https://stern-webdev-2018.herokuapp.com';           // for deployment
+    this.loginURL = 'https://stern-webdev-2018.herokuapp.com/api/login';
+	  this.registerURL = 'https://stern-webdev-2018.herokuapp.com/api/register';
     var self = this;
 
     function login(user) {
