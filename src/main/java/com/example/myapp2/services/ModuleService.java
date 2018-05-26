@@ -27,12 +27,10 @@ public class ModuleService {
 	ModuleRepository moduleRepository;
 	
 	@PostMapping("/api/course/{courseId}/module")
-	public Module createModule(
-			@PathVariable("courseId") int courseId,
-			@RequestBody Module newModule) {
+	public Module createModule(@PathVariable("courseId") int courseId, @RequestBody Module newModule) {
 		Optional<Course> data = courseRepository.findById(courseId);
 		
-		if(data.isPresent()) {
+		if (data.isPresent()) {
 			Course course = data.get();
 			newModule.setCourse(course);
 			return moduleRepository.save(newModule);
@@ -41,10 +39,10 @@ public class ModuleService {
 	}
 	
 	@GetMapping("/api/course/{courseId}/module")
-	public List<Module> findAllModulesForCourse(
-			@PathVariable("courseId") int courseId) {
+	public List<Module> findAllModulesForCourse(@PathVariable("courseId") int courseId) {
 		Optional<Course> data = courseRepository.findById(courseId);
-		if(data.isPresent()) {
+		
+		if (data.isPresent()) {
 			Course course = data.get();
 			return course.getModules();
 		}
@@ -52,14 +50,12 @@ public class ModuleService {
 	}
 	
 	@DeleteMapping("/api/module/{moduleId}")
-	public void deleteModule(@PathVariable("moduleId") int moduleId)
-	{
+	public void deleteModule(@PathVariable("moduleId") int moduleId) {
 		moduleRepository.deleteById(moduleId);
 	}
 	
 	@GetMapping("/api/module")
-	public List<Module> findAllModules()
-	{
+	public List<Module> findAllModules() {
 		return (List<Module>) moduleRepository.findAll();
 	}
 }

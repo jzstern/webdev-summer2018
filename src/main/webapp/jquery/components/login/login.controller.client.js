@@ -26,7 +26,6 @@
 
   function checkLogin(users) {
     var user = users[0]
-    console.log(user)
 
     if (user.username === null && user.password === null) {
       alert('Sorry, that username password combination does not exist')

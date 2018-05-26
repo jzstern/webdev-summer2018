@@ -1,7 +1,5 @@
 package com.example.myapp2.models;
 
-import static org.assertj.core.api.Assertions.allOf;
-
 import java.util.Date;
 import java.util.List;
 
