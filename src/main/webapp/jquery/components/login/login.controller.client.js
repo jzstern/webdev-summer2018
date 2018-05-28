@@ -27,7 +27,7 @@
   function checkLogin(users) {
     var user = users[0]
 
-    if (user.username === null && user.password === null) {
+    if (users.length == 0) {
       alert('Sorry, that username password combination does not exist')
     } else {
       window.location.href = "../profile/profile.template.client.html?" + user.id
