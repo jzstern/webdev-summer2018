@@ -10,9 +10,9 @@ function UserServiceClient() {
     // this.url = 'http://localhost:8080/api/user';                    // for local testing
     // this.loginURL = 'http://localhost:8080/api/login';
     // this.registerURL = 'http://localhost:8080/api/register';
-    this.url = 'https://stern-webdev-2018.herokuapp.com';           // for deployment
+    this.url = 'https://stern-webdev-2018.herokuapp.com/api/user';           // for deployment
     this.loginURL = 'https://stern-webdev-2018.herokuapp.com/api/login';
-	  this.registerURL = 'https://stern-webdev-2018.herokuapp.com/api/register';
+    this.registerURL = 'https://stern-webdev-2018.herokuapp.com/api/register';
     var self = this;
 
     function login(user) {
@@ -77,6 +77,7 @@ function UserServiceClient() {
     function findAllUsers() {
         return fetch(self.url)
             .then(function (response) {
+                console.log(response.json())
                 return response.json()
             });
     }
