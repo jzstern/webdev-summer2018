@@ -33,8 +33,61 @@ public class LessonService {
 	@Autowired
 	LessonRepository lessonRepository;	
 	
+	@PutMapping("api/lesson/{lessonId}")
+	public Lesson updateLesson(@PathVariable("lessonId") int lessonId, @RequestBody Lesson updatedLesson) {
+		Optional<Lesson> data = lessonRepository.findById(lessonId);
+		
+		if (data.isPresent()) {
+			Lesson lesson = data.get();
+			
+			if (updatedLesson.getTitle() != null) {
+				lesson.setTitle(updatedLesson.getTitle());
+			}
+			if (updatedLesson.getModule() != null) {
+				lesson.setModule(updatedLesson.getModule());
+			}
+			lessonRepository.save(lesson);
+			return lesson;
+		} else {
+			return null;
+		}
+	}
+	
+	@GetMapping("/api/lesson")
+	public Iterable<Lesson> findAllLessons() {
+		return lessonRepository.findAll(); 
+	}
+	
+	@GetMapping("api/lesson/{lessonId}")
+	public Lesson findLessonById(@PathVariable("lessonId") int lessonId) {
+		Optional<Lesson> data = lessonRepository.findById(lessonId);
+		
+		if (data.isPresent()) {
+			return data.get();
+		} else {
+			return null;
+		}
+	}
+	
+	@GetMapping("/api/course/{courseId}/module/{moduleId}/lesson")
+	public List<Lesson> findAllLessonsForModule(@PathVariable("moduleId") int moduleId) {
+		Optional<Module> data = moduleRepository.findById(moduleId);
+		
+		if (data.isPresent()) {
+			Module m = data.get();
+			return m.getLessons();
+		} 
+		else {
+			List<Lesson> lessons = new ArrayList<>();
+			lessons.add(new Lesson());
+			return lessons;
+//			return null;
+		}
+	}
+	
 	@PostMapping("/api/course/{courseId}/module/{moduleId}/lesson")
-	public Lesson createLesson(@PathVariable("moduleId") int moduleId, @PathVariable("courseId") int courseId, @RequestBody Lesson lesson) {
+	public Lesson createLesson(@PathVariable("moduleId") int moduleId, 
+			@PathVariable("courseId") int courseId, @RequestBody Lesson lesson) {
 		Optional<Module> data = moduleRepository.findById(moduleId);
 		
 		if (data.isPresent()) {
@@ -47,14 +100,15 @@ public class LessonService {
 		return null;
 	}
 	
-	@GetMapping("api/lesson/{lessonId}")
-	public Lesson findLessonById(@PathVariable("lessonId") int lessonId) {
-		Optional<Lesson> data = lessonRepository.findById(lessonId);
-		
-		if (data.isPresent()) {
-			return data.get();
-		} else {
-			return null;
+	@DeleteMapping("/api/lesson/{lessonId}")
+	public void deleteLesson(@PathVariable("lessonId") int lessonId) {
+		Optional<Lesson> lesson = lessonRepository.findById(lessonId);
+		if (lesson.isPresent()) {
+			Lesson l = lesson.get();
+			Module module = l.getModule();
+			Course course = module.getCourse();
+			course.setModified(new Date());
 		}
+		lessonRepository.deleteById(lessonId);
 	}
 }
