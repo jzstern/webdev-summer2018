@@ -5,15 +5,18 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
+import com.example.myapp2.models.Questions.Question;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Exam extends Widget {
 	private String title;
 	private String description;
+	
 	@OneToMany(mappedBy="exam")
 	@JsonIgnore
 	private List<Question> questions;
+	
 	public String getTitle() {
 		return title;
 	}
