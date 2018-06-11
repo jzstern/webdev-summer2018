@@ -136,7 +136,8 @@ public class WidgetService {
 	@GetMapping("/api/lesson/{lessonId}/widget")
 	public List<Widget> findAllWidgetsForLesson(@PathVariable("lessonId") int lessonId) {
 		Optional<Lesson> optionalLesson = lessonRepository.findById(lessonId);
-		if(optionalLesson.isPresent()) {
+		
+		if (optionalLesson.isPresent()) {
 			Lesson lesson = optionalLesson.get();
 			List<Widget> ws = lesson.getWidgets();
 			return ws;
